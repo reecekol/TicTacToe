@@ -1,0 +1,122 @@
+<!doctype html>
+<html>
+  <head>
+     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.js"></script>
+	 <script>
+	   Game={
+	       
+		   reset:function(){
+		   
+		   
+		   
+		     this.board=["","","","","","","","",""], // clear data structure
+			 
+			 
+		     $("td").each(function(){
+			 
+			   $(this).text("");
+			    
+			 })
+		   
+		   },
+		   
+		   board:["","","","","","","","",""],
+		   
+		   move:function(target)
+		   {  
+		   
+		       //local scoping 
+		      var playerMove;
+		    
+			  var  number=$(target).attr("id");
+			  
+              console.log(number);
+			  
+			  this.board[number]=this.turn;
+			  
+			  
+			  
+			  
+			  if (this.checkBoardFilled() && !this.checkForWin())
+			  {
+			    alert("Game Over");
+			    this.reset();
+			  }
+			  
+			  
+			  
+			  console.log(this.board);
+			  
+			  if(this.turn==='X'){
+				  playerMove="X";
+			  }
+			  
+			  else {
+			       playerMove="O";
+			   }
+			   
+			   
+			   $(target).text(playerMove);
+			   
+			   
+			    //check for win;
+				
+			   this.updateTurn();
+		   },
+		   
+		   turn:"X",  /*X goes first */
+		  
+		   gameWon:false,
+		   
+		   
+		   patterns:[[0,1,2],[3,4,5],[6,7,8]],
+		   
+		   checkBoardFilled:function(){
+		     
+			 for(i=0;  i<9; i++)
+			 {
+			   if(this.board[i]===" ")
+			   {
+			     return false;
+			   }
+			 }
+		      return true;
+		   },
+		   
+		   updateTurn:function(){
+		   
+		     this.turn==="X"? this.turn="O":this.turn="X";
+		   },
+		   
+		   checkForWin: function(){
+		   
+		     return false;
+		   }
+	   }
+	 </script>
+	 
+	 <script> 
+	    $(document).ready(function(){
+		  
+		   
+		   $("td").click(function(){
+		         Game.move(this);
+			 });
+		});
+	 </script>
+	<link rel="stylesheet" type="text/css" href="style.css"/>
+	
+  </head>
+  <body>
+      <div id="container">
+
+       <table>
+	      <tr><td id="0"> </td> <td id="1"> </td> <td id="2"> </td></tr>
+          <tr><td id="3"> </td> <td id="4"></td> <td id="5"> </td></tr>
+		  <tr><td id="6"></td> <td id="7"></td> <td id="8"> </td></tr>
+	   </table>
+	  </div>
+	  
+	  <button>Reset </button>
+  </body>
+</html>
