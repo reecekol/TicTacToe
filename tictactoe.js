@@ -1,75 +1,60 @@
 Game={
 	       
-		   reset:function(){
-		   
-		   
-		   
-		     this.board=["","","","","","","","",""], // clear data structure
+    reset:function(){
+		   		   
+	  this.board=["","","","","","","","",""], // clear data structure
+			 		 
+	  $("td").each(function(){
 			 
-			 
-		     $("td").each(function(){
-			 
-			   $(this).text("");
-			    
-			 })
+	     $(this).text("");
+	   })
 		   
-		   },
+	},
 		   
-		   board:["","","","","","","","",""],
+	board:["","","","","","","","",""],
 		   
-		   move:function(target)
-		   {  
-		   
-		       //local scoping 
-		      var playerMove;
+	move:function(target)
+    {  
+        //local scoping 
+		var playerMove;
 		    
-			  var  number=$(target).attr("id");
+	    var  number=$(target).attr("id");
 			  
-              console.log(number);
+        console.log(number);
 			  
-			  this.board[number]=this.turn;
-			  
-			  
+		this.board[number]=this.turn;
 			  
 			  
-			  if (this.checkBoardFilled())
-			  {
-			    alert("Game Over");
-			    this.reset();
-			  }
+		if (this.checkBoardFilled())
+		{
+			alert("Game Over");
+			this.reset();
+		}
+			  	  
+		console.log(this.board);
 			  
-			  
-			  
-			  console.log(this.board);
-			  
-			  if(this.turn==='X'){
-				  playerMove="X";
-			  }
-			  
-			  else {
-			       playerMove="O";
-			   }
+		if(this.turn==='X'){
+			playerMove="X";
+		}		  
+	    else{
+			playerMove="O";
+		}
+			   	   
+		$(target).text(playerMove);
 			   
-			   
-			   $(target).text(playerMove);
-			   
-			   
-			    
-				this.checkForWin();
+			this.checkForWin();
 				
-				
-			   this.updateTurn();
-		   },
+		    this.updateTurn();
+		},
 		   
-		   turn:"X",  /*X goes first */
+		turn:"X",  /*X goes first */
 		  
-		   gameWon:false,
+		gameWon:false,
 		   
+		patterns:[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]],
 		   
-		   patterns:[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]],
-		   
-		   checkBoardFilled:function(){
-		     
+		checkBoardFilled:function(){
+     
 			 for(i=0;  i<9; i++)
 			 {
 			   if(this.board[i]==="")
@@ -78,14 +63,14 @@ Game={
 			   }
 			 }
 		      return true;
-		   },
+		},
 		   
-		   updateTurn:function(){
+		updateTurn:function(){
 		     this.turn==="X"? this.turn="O":this.turn="X";
 			 
-		   },
+		},
 		   
-		   checkForWin: function(){
+		checkForWin: function(){
 		     
 		     for( k in this.patterns)
 			 { 
@@ -108,6 +93,6 @@ Game={
 		         
 			  }
 			  
-			}
+		}
 		   
-	   }
+ }
